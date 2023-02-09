@@ -1,9 +1,8 @@
 const mongoose=require("mongoose");
-const uri="mongodb+srv://saroyar:saroyar43@cluster0.6oa8trz.mongodb.net/todo_list?retryWrites=true&w=majority";
-// const uri="mongodb://localhost:27017/todolist";
+const url="mongodb+srv://saroyar:saroyar43@cluster0.6oa8trz.mongodb.net/todo_list?retryWrites=true&w=majority";
 
 exports.databaseconnect=()=>{
-    mongoose.connect(uri,()=>{
+    mongoose.connect(url,()=>{
         console.log("mosgoose connect to database");
     })
 }

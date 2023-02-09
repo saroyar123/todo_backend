@@ -8,11 +8,12 @@ const cookieparser=require("cookie-parser");
 const dotenv=require('dotenv');
 const cors=require('cors');
 
-dotenv.config();
+dotenv.config({path:"/.env"});
 
-databaseconnect();
+
 
 const app=express();
+databaseconnect();
 app.use(express.json());
 app.use(cookieparser());
 app.use(cors());
