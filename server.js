@@ -8,7 +8,7 @@ const cookieparser=require("cookie-parser");
 const dotenv=require('dotenv');
 const cors=require('cors');
 
-dotenv.config({path:"/.env"});
+dotenv.config();
 
 
 
@@ -37,5 +37,5 @@ router.get("/getUserData",Authitication,getUserData);
 app.use("/api",router);
 
 app.listen(process.env.PORT||1234,()=>{
-    console.log("server is running at port 4000")
+    console.log(`server runing on port ${process.env.PORT}`)
 })
