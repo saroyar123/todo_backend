@@ -26,7 +26,7 @@ app.use(cookieparser());
 app.use(cors({
     credentials:true,
     methods:["GET","POST","PUT","DELETE"],
-    origin:["*"]
+    origin:["http://localhost:3000"]
 }));
 
 const router = express.Router();
