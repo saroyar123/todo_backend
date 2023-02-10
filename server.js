@@ -26,11 +26,11 @@ app.use(cookieparser());
 app.use(cors({
     credentials:true,
     methods:["GET","POST","PUT","DELETE"],
-    origin:["https://todolist-f5k4.onrender.com/"]
+    origin:["https://todolist-f5k4.onrender.com"]
 }));
 
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://todolist-f5k4.onrender.com/"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Origin", "https://todolist-f5k4.onrender.com"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
