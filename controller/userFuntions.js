@@ -24,7 +24,7 @@ exports.login = async (req, res) => {
       });
     }
 
-    const token = jwt.sign({ email: email },"saroyarhossain");
+    const token = jwt.sign({ email: email },process.env.jwt_private_key);
 
     user.token = token;
 
@@ -76,14 +76,16 @@ exports.register = async (req, res) => {
       email: email,
     });
 
-    const token = jwt.sign({ email: email }, "saroyarhossain");
+    const token = jwt.sign({ email: email },process.env.jwt_private_key);
 
     newUser.token = token;
     await newUser.save();
 
     const option = {
       expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+      SameSite:None,
       httpOnly: true,
+      Secure:true,
     };
 
     res.status(200).cookie("token", token, option).json({
