@@ -33,6 +33,7 @@ exports.login = async (req, res) => {
       httpOnly:true,
       secure:true,
       sameSite:'None',
+      domain:"https://todolist-f5k4.onrender.com"
     };
 
     // console.log(req.user);

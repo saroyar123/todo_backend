@@ -25,5 +25,5 @@ router.post("/addTask", Authitication, addTasks);
 <!-- for delete task -->
 router.delete("/deleteTask/:id", Authitication, deleteTask);
 
-<!-- for get user all data -->
+<!-- for get user all -->
 router.get("/getUserData", Authitication, getUserData);
