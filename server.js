@@ -17,7 +17,7 @@ app.use(
   cors({
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
-    origin: ["https://todolist-f5k4.onrender.com","http://localhost:4000/"],
+    origin: ["https://todolist-f5k4.onrender.com","http://localhost:3000/"],
   })
 );
 
