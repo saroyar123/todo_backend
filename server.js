@@ -10,16 +10,16 @@ dotenv.config();
 
 const app = express();
 databaseconnect();
-// app.use(cors())
+app.use(cors())
 app.use(express.json());
 app.use(cookieparser());
-app.use(
-  cors({
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    origin: ["https://todolist-f5k4.onrender.com","http://localhost:3000/"],
-  })
-);
+// app.use(
+//   cors({
+//     credentials: true,
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     origin: ["https://todolist-f5k4.onrender.com","http://localhost:3000/"],
+//   })
+// );
 
 // app.use(function (req, res, next) {
 //   res.header(
