@@ -33,7 +33,7 @@ exports.login = async (req, res) => {
       httpOnly:true,
       secure:true,
       sameSite:'None',
-      domain:"https://todolist-f5k4.onrender.com"
+      // domain:"https://todolist-f5k4.onrender.com"
     };
 
     // console.log(req.user);
@@ -41,6 +41,8 @@ exports.login = async (req, res) => {
     res.cookie("token", token, option).status(200).json({
       success: true,
       message: "you are login",
+      Token:token
+  
     });
   } catch (error) {
     await res.status(404).json({
@@ -95,6 +97,7 @@ exports.register = async (req, res) => {
     res.status(200).cookie("token", token, option).json({
       success: true,
       message: "user created",
+      Token:token
     });
   } catch (error) {
     res.status(404).json({

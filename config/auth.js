@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 exports.Authitication = async (req, res, next) => {
   try {
     const { token } = req.cookies;
+    console.log(token)
 
     if(!token)
     {
@@ -13,7 +14,7 @@ exports.Authitication = async (req, res, next) => {
         })
     }
 
-    const email = jwt.verify(token, "saroyarhossain");
+    const email = jwt.verify(token,process.env.jwt_private_key);
 
     const user = await User.findOne({ email: email.email });
     req.user = user;
