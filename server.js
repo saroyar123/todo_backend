@@ -4,7 +4,6 @@ const cookieparser = require("cookie-parser");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const router = require("./routes/route");
-const cors = require('cors')
 
 dotenv.config();
 

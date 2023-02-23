@@ -1,29 +1,34 @@
-routes --
+```
+This is the backend of the To-Do-List project
+```
 
-router.get("/", (req, res) => {
+
+## Routes
+
+
+
+```
+
+get("api/", (req, res) => {
     res.status(200).json({
       success: true,
       message: "server is running",
     });
   });
 
-<!-- for login -->
-router.post("/login", login);
+post("/api/login", login);
+post("/api/register", register);  
+get("/api/logout", Authitication, logout);  
+delete("/api/deleteAccount", Authitication, deleteAccount);  
+post("/api/addTask", Authitication, addTasks);
+delete("/api/deleteTask/:id", Authitication, deleteTask);
+get("/api/getUserData", Authitication, getUserData);
+```
 
-<!-- for register -->
-router.post("/register", register);
-
-<!-- for logout -->
-router.get("/logout", Authitication, logout);
-
-<!-- for delete account -->
-router.delete("/deleteAccount", Authitication, deleteAccount);
-
-<!-- for add task -->
-router.post("/addTask", Authitication, addTasks);
-
-<!-- for delete task -->
-router.delete("/deleteTask/:id", Authitication, deleteTask);
-
-<!-- for get user all -->
-router.get("/getUserData", Authitication, getUserData);
+## Authentication
+```
+For authentication of the user JWT token-based authentication is used.
+```
+```
+Deploy:https://todo-backend-66o7.onrender.com
+```
