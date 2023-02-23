@@ -31,8 +31,6 @@ exports.login = async (req, res) => {
     const option = {
       expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
       httpOnly:true,
-      secure:true,
-      sameSite:'None',
       // domain:"https://todolist-f5k4.onrender.com"
     };
 
@@ -41,7 +39,6 @@ exports.login = async (req, res) => {
     res.cookie("token", token, option).status(200).json({
       success: true,
       message: "you are login",
-      Token:token
   
     });
   } catch (error) {
@@ -74,7 +71,7 @@ exports.register = async (req, res) => {
         message: "user already exist",
       });
     }
-
+    console.log(name,email,password);
     // console.log(process.env.jwt_private_key);
     const newUser = await User.create({
       name: name,
@@ -89,15 +86,12 @@ exports.register = async (req, res) => {
 
     const option = {
       expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
-      httpOnly:true,
-      secure:true,
-      sameSite:'None'
+      httpOnly:true
     };
 
     res.status(200).cookie("token", token, option).json({
       success: true,
       message: "user created",
-      Token:token
     });
   } catch (error) {
     res.status(404).json({
@@ -146,7 +140,8 @@ exports.deleteAccount = async (req, res) => {
     const user = req.user;
     const todolist=user.todolist;
    
-    todolist.map(async(task,index)=>{
+    todolist.map(async(task)=>{
+      // console.log(task)
       const deleteTask=await Task.findOne(task._id);
       await deleteTask.remove();
     })
@@ -216,15 +211,25 @@ exports.addTasks = async (req, res) => {
 exports.deleteTask = async (req, res) => {
   try {
     const userId = req.params.id;
+    // console.log(userId)
 
     const task = await Task.findById(userId);
+    if(!task)
+    {
+      return res.status(400).json({
+        success: false,
+        message: "your data not exists",
+      });
+    }
     await task.remove();
 
     const user = req.user;
     const index = await user.todolist.indexOf(userId);
+    user.todolist.splice(index,1);
+    user.save();
 
     if (!index) {
-      return res.status(200).json({
+      return res.status(400).json({
         success: false,
         message: "your data not exists",
       });
