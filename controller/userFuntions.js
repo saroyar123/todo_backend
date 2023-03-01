@@ -8,6 +8,7 @@ exports.login = async (req, res) => {
     const password = req.body.password;
     const email = req.body.email;
 
+
     const user = await User.findOne({ email: email }).populate("todolist");
 
     if (!user) {
@@ -28,17 +29,18 @@ exports.login = async (req, res) => {
 
     user.token = token;
 
-    const option = {
-      expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
-      httpOnly:true,
-      // domain:"https://todolist-f5k4.onrender.com"
-    };
+    // const option = {
+    //   expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+    //   httpOnly:true,
+    //   // domain:"https://todolist-f5k4.onrender.com"
+    // };
 
     // console.log(req.user);
 
-    res.cookie("token", token, option).status(200).json({
+    res.status(200).json({
       success: true,
       message: "you are login",
+      token:token
   
     });
   } catch (error) {
@@ -84,14 +86,15 @@ exports.register = async (req, res) => {
     newUser.token = token;
     await newUser.save();
 
-    const option = {
-      expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
-      httpOnly:true
-    };
+    // const option = {
+    //   expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+    //   httpOnly:true
+    // };
 
-    res.status(200).cookie("token", token, option).json({
+    res.json({
       success: true,
       message: "user created",
+      token:token
     });
   } catch (error) {
     res.status(404).json({
@@ -117,10 +120,6 @@ exports.logout = async (req, res) => {
 
     res
       .status(200)
-      .cookie("token", null, {
-        expires: new Date(Date.now()),
-        httpOnly: true,
-      })
       .json({
         success: true,
         message: "you are logout successfully",
@@ -153,10 +152,6 @@ exports.deleteAccount = async (req, res) => {
 
     res
       .status(200)
-      .cookie("token", null, {
-        expires: new Date(Date.now()),
-        httpOnly: true,
-      })
       .json({
         success: false,
         message: "your account is deleted",
@@ -225,8 +220,7 @@ exports.deleteTask = async (req, res) => {
 
     const user = req.user;
     const index = await user.todolist.indexOf(userId);
-    user.todolist.splice(index,1);
-    user.save();
+
 
     if (!index) {
       return res.status(400).json({
