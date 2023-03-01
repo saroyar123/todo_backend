@@ -11,10 +11,10 @@ router.get("/", (req, res) => {
   });
 router.post("/login", login);
 router.post("/register", register);
-router.get("/logout", Authitication, logout);
-router.delete("/deleteAccount", Authitication, deleteAccount);
-router.post("/addTask", Authitication, addTasks);
-router.delete("/deleteTask/:id", Authitication, deleteTask);
-router.get("/getUserData", Authitication, getUserData);
+router.get("/logout/:token", Authitication, logout);
+router.delete("/deleteAccount/:token", Authitication, deleteAccount);
+router.post("/addTask/:token", Authitication, addTasks);
+router.delete("/deleteTask/:id/:token", Authitication, deleteTask);
+router.get("/getUserData/:token", Authitication, getUserData);
 
 module.exports=router;
